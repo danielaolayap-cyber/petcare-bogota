@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCare Bogotá Norte - Comercio, Comunidad e Impacto (Cll 138 a 170)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                        },
+                        tealBrand: {
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- TOP ZONE BANNER -->
+    <div class="bg-slate-900 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 text-center sm:text-left">
+            <div class="flex items-center gap-2">
+                <span class="bg-orange-500 text-white font-extrabold px-2 py-0.5 rounded text-[10px] uppercase tracking-wider">Zona Bogotá Norte</span>
+                <span class="font-semibold text-slate-300">Cobertura especial: <strong class="text-white">Calle 138 a Calle 170</strong> (Cedritos, Mazurén, Toberín, Colina, San José)</span>
+            </div>
+            <div class="flex items-center gap-3 text-slate-400">
+                <span><i class="fa-solid fa-truck-fast text-orange-400 mr-1"></i> Domicilios locales inmediatos</span>
+                <span class="hidden md:inline">|</span>
+                <span class="hidden md:inline"><i class="fa-solid fa-store text-emerald-400 mr-1"></i> Pickup en tienda</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVIGATION HEADER -->
+    <header class="sticky top-0 z-40 glass-header border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-2 cursor-pointer" onclick="navigateTo('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 to-amber-400 flex items-center justify-center text-white shadow-md shadow-orange-200">
+                        <i class="fa-solid fa-paw text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1">
+                            <span class="text-xl font-extrabold bg-gradient-to-r from-orange-600 to-amber-600 bg-clip-text text-transparent">PetCare</span>
+                            <span class="text-xs font-bold text-slate-600">Bogotá</span>
+                        </div>
+                        <span class="text-[10px] text-teal-700 font-extrabold block -mt-1"><i class="fa-solid fa-location-dot"></i> Cll 138 - 170</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav Tabs -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-3 font-semibold text-sm">
+                    <button id="nav-home" onclick="navigateTo('home')" class="nav-link px-3 py-2 rounded-lg text-slate-600 hover:text-orange-600 hover:bg-orange-50 transition">Inicio</button>
+                    <button id="nav-brands" onclick="navigateTo('brands')" class="nav-link px-3 py-2 rounded-lg text-slate-600 hover:text-orange-600 hover:bg-orange-50 transition">Tiendas (Cll 138-170)</button>
+                    <button id="nav-products" onclick="navigateTo('products')" class="nav-link px-3 py-2 rounded-lg text-slate-600 hover:text-orange-600 hover:bg-orange-50 transition">Catálogo Norte</button>
+                    <button id="nav-community" onclick="navigateTo('community')" class="nav-link px-3 py-2 rounded-lg text-slate-600 hover:text-orange-600 hover:bg-orange-50 transition flex items-center gap-1.5">
+                        <span>Comunidad e Impacto</span>
+                        <span class="w-2 h-2 rounded-full bg-teal-500 animate-ping"></span>
+                    </button>
+                </nav>
+
+                <!-- Actions / Cart / Account -->
+                <div class="flex items-center gap-3">
+                    <!-- Cart Button -->
+                    <button onclick="openCartModal()" class="relative p-2.5 rounded-xl bg-slate-100 hover:bg-orange-100 text-slate-700 hover:text-orange-600 transition">
+                        <i class="fa-solid fa-bag-shopping text-lg"></i>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-orange-600 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white hidden">0</span>
+                    </button>
+
+                    <!-- User Dashboard Button -->
+                    <button id="nav-account" onclick="navigateTo('account')" class="flex items-center gap-2 px-3 py-2 rounded-xl bg-orange-600 text-white hover:bg-orange-700 shadow-md shadow-orange-200 transition font-medium text-sm">
+                        <i class="fa-solid fa-circle-user text-base"></i>
+                        <span class="hidden sm:inline" id="user-btn-label">Mi Cuenta</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-2 pb-4 space-y-1">
+            <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-orange-50 hover:text-orange-600">Inicio</button>
+            <button onclick="navigateTo('brands'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-orange-50 hover:text-orange-600">Tiendas Cll 138 - 170</button>
+            <button onclick="navigateTo('products'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-orange-50 hover:text-orange-600">Catálogo de Productos</button>
+            <button onclick="navigateTo('community'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-orange-50 hover:text-orange-600">Comunidad & Adopciones Norte</button>
+            <button onclick="navigateTo('account'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-lg font-medium text-slate-700 hover:bg-orange-50 hover:text-orange-600">Mi Cuenta & Panel de Tienda</button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINERS -->
+    <main class="flex-grow">
+
+        <!-- VIEW 1: INICIO (HOME) -->
+        <section id="view-home" class="view-section">
+            <!-- Hero Banner -->
+            <div class="relative bg-gradient-to-br from-orange-500 via-amber-500 to-teal-600 text-white overflow-hidden py-12 md:py-16">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="space-y-6 text-center md:text-left">
+                            <span class="inline-block bg-white/20 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full uppercase tracking-wider">
+                                <i class="fa-solid fa-location-dot mr-1"></i> Bogotá Norte: Cll 138 a 170
+                            </span>
+                            <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight">
+                                Tiendas, Emprendimientos y Bienestar Animal en tu Barrio
+                            </h1>
+                            <p class="text-white/90 text-base sm:text-lg max-w-xl">
+                                Conecta con pet shops locales, veterinarias y refugios de Cedritos, Mazurén, Toberín, Colina Campestre y San José de Bavaria.
+                            </p>
+
+                            <!-- Neighborhood Pills Quick Selector -->
+                            <div class="pt-2">
+                                <p class="text-xs font-bold uppercase tracking-wider text-amber-100 mb-2">Sectores destacados:</p>
+                                <div class="flex flex-wrap gap-1.5 justify-center md:justify-start">
+                                    <button onclick="filterByNeighborhood('Cedritos')" class="px-2.5 py-1 bg-white/20 hover:bg-white/30 text-white rounded-lg text-xs font-bold transition">📍 Cedritos (Cll 140-147)</button>
+                                    <button onclick="filterByNeighborhood('Mazurén')" class="px-2.5 py-1 bg-white/20 hover:bg-white/30 text-white rounded-lg text-xs font-bold transition">📍 Mazurén (Cll 152)</button>
+                                    <button onclick="filterByNeighborhood('Toberín')" class="px-2.5 py-1 bg-white/20 hover:bg-white/30 text-white rounded-lg text-xs font-bold transition">📍 Toberín (Cll 164)</button>
+                                    <button onclick="filterByNeighborhood('Colina Campestre')" class="px-2.5 py-1 bg-white/20 hover:bg-white/30 text-white rounded-lg text-xs font-bold transition">📍 Colina (Cll 138)</button>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-wrap gap-3 justify-center md:justify-start pt-2">
+                                <button onclick="navigateTo('products')" class="px-6 py-3 rounded-xl bg-white text-orange-600 font-bold shadow-lg hover:bg-orange-50 transition transform hover:-translate-y-0.5">
+                                    <i class="fa-solid fa-store mr-2"></i> Ver Catálogo Norte
+                                </button>
+                                <button onclick="navigateTo('community')" class="px-6 py-3 rounded-xl bg-teal-800/40 border border-white/40 text-white font-bold hover:bg-teal-800/60 transition backdrop-blur-sm">
+                                    <i class="fa-solid fa-hand-holding-heart mr-2"></i> Refugios Zona Norte
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Live Impact Cards Grid -->
+                        <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-center">
+                                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-white/20 flex items-center justify-center text-white font-bold">
+                                    <i class="fa-solid fa-store text-lg"></i>
+                                </div>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold">34+</h3>
+                                <p class="text-xs text-white/80 font-medium">Tiendas Cll 138-170</p>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-center">
+                                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-white/20 flex items-center justify-center text-white font-bold">
+                                    <i class="fa-solid fa-shield-dog text-lg"></i>
+                                </div>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold">580+</h3>
+                                <p class="text-xs text-white/80 font-medium">Mascotas en Zona Norte</p>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-center">
+                                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-white/20 flex items-center justify-center text-white font-bold">
+                                    <i class="fa-solid fa-bone text-lg"></i>
+                                </div>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold">1.4 Ton.</h3>
+                                <p class="text-xs text-white/80 font-medium">Donadas a Refugios del Norte</p>
+                            </div>
+                            <div class="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-2xl text-center">
+                                <div class="w-10 h-10 mx-auto mb-2 rounded-full bg-white/20 flex items-center justify-center text-white font-bold">
+                                    <i class="fa-solid fa-tree text-lg"></i>
+                                </div>
+                                <h3 class="text-2xl sm:text-3xl font-extrabold">6</h3>
+                                <p class="text-xs text-white/80 font-medium">Parques de Encuentro Pet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Category Nav -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-6 relative z-20">
+                <div class="bg-white rounded-2xl shadow-xl p-4 sm:p-6 border border-slate-100">
+                    <h2 class="text-xs uppercase font-extrabold text-slate-400 mb-3 tracking-wider text-center md:text-left">Categorías de Productos Locales</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+                        <button onclick="filterByCategory('Comida')" class="flex flex-col items-center p-3 rounded-xl hover:bg-orange-50 border border-slate-100 hover:border-orange-200 transition group">
+                            <span class="w-12 h-12 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-bowl-food"></i></span>
+                            <span class="text-sm font-bold text-slate-700">Comida & Snacks</span>
+                        </button>
+                        <button onclick="filterByCategory('Juguetes')" class="flex flex-col items-center p-3 rounded-xl hover:bg-orange-50 border border-slate-100 hover:border-orange-200 transition group">
+                            <span class="w-12 h-12 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-baseball"></i></span>
+                            <span class="text-sm font-bold text-slate-700">Teething & Juguetes</span>
+                        </button>
+                        <button onclick="filterByCategory('Higiene')" class="flex flex-col items-center p-3 rounded-xl hover:bg-orange-50 border border-slate-100 hover:border-orange-200 transition group">
+                            <span class="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-soap"></i></span>
+                            <span class="text-sm font-bold text-slate-700">Higiene & Salud</span>
+                        </button>
+                        <button onclick="filterByCategory('Moda')" class="flex flex-col items-center p-3 rounded-xl hover:bg-orange-50 border border-slate-100 hover:border-orange-200 transition group">
+                            <span class="w-12 h-12 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-shirt"></i></span>
+                            <span class="text-sm font-bold text-slate-700">Moda & Accesorios</span>
+                        </button>
+                        <button onclick="navigateTo('community')" class="flex flex-col items-center p-3 rounded-xl hover:bg-teal-50 border border-slate-100 hover:border-teal-200 transition group col-span-2 sm:col-span-1">
+                            <span class="w-12 h-12 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-xl mb-2 group-hover:scale-110 transition"><i class="fa-solid fa-heart-circle-plus"></i></span>
+                            <span class="text-sm font-bold text-teal-800">Adopción Norte</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Products & Impact Highlight -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="flex justify-between items-end mb-6">
+                    <div>
+                        <span class="text-xs font-bold text-orange-600 tracking-wider uppercase">En el corredor Cll 138 - 170</span>
+                        <h2 class="text-2xl font-extrabold text-slate-900">Productos Destacados con Entrega Local</h2>
+                    </div>
+                    <button onclick="navigateTo('products')" class="text-sm font-bold text-orange-600 hover:text-orange-700 flex items-center gap-1">
+                        Ver Catálogo Completo <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <div id="home-featured-products" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Dynamic Featured Products Render Here -->
+                </div>
+            </div>
+
+            <!-- Bogotá Northern Corridor Map Banner -->
+            <div class="bg-slate-900 text-white py-12 border-t border-slate-800">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <span class="text-xs font-bold text-orange-400 uppercase tracking-wider">Ubicación Estratégica</span>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold mt-1">Sostenibilidad Comercial en el Norte de Bogotá</h2>
+                            <p class="text-slate-300 text-sm mt-3 leading-relaxed">
+                                PetCare une a vecinos, comercios y albergues entre la **Calle 138 y Calle 170**. Al comprar localmente se reducen las huellas de carbono por transporte y se fortalece el fondo de donación para animales rescatados en la sabana y el norte de la ciudad.
+                            </p>
+                            <div class="mt-6 space-y-2 text-xs text-slate-300">
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Entrega en menos de 2 horas en Cedritos, Mazurén y Colina.</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Puntos de recogida (Pick-up) presenciales en Toberín y San José.</div>
+                                <div class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> 5% a 10% de cada compra apoya a la Fundación Peluditos Norte Bogotá.</div>
+                            </div>
+                        </div>
+
+                        <!-- Sector Grid Visual -->
+                        <div class="bg-slate-800 p-6 rounded-3xl border border-slate-700 grid grid-cols-2 gap-3 text-center">
+                            <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-700">
+                                <i class="fa-solid fa-map-pin text-orange-400 text-lg mb-1"></i>
+                                <h4 class="font-bold text-sm text-white">Cedritos</h4>
+                                <p class="text-[11px] text-slate-400">Calle 140 - 147</p>
+                            </div>
+                            <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-700">
+                                <i class="fa-solid fa-map-pin text-orange-400 text-lg mb-1"></i>
+                                <h4 class="font-bold text-sm text-white">Mazurén</h4>
+                                <p class="text-[11px] text-slate-400">Calle 152 - Autonorte</p>
+                            </div>
+                            <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-700">
+                                <i class="fa-solid fa-map-pin text-orange-400 text-lg mb-1"></i>
+                                <h4 class="font-bold text-sm text-white">Toberín</h4>
+                                <p class="text-[11px] text-slate-400">Calle 161 - 166</p>
+                            </div>
+                            <div class="p-3 bg-slate-900/60 rounded-xl border border-slate-700">
+                                <i class="fa-solid fa-map-pin text-orange-400 text-lg mb-1"></i>
+                                <h4 class="font-bold text-sm text-white">San José de Bavaria</h4>
+                                <p class="text-[11px] text-slate-400">Calle 170 / Cra 58</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 2: MARCAS (BRANDS DIRECTORY) -->
+        <section id="view-brands" class="view-section hidden py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header & Search -->
+                <div class="bg-gradient-to-r from-orange-100 via-amber-50 to-teal-50 rounded-3xl p-6 sm:p-8 mb-8 border border-orange-200">
+                    <span class="text-xs font-bold text-orange-600 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot"></i> Corredor Comercial Norte</span>
+                    <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Tiendas y Marcas en Bogotá (Cll 138 - 170)</h1>
+                    <p class="text-slate-600 mb-6 max-w-2xl text-sm">Encuentra tiendas físicas, talleres artesanales y refugios aliados ubicados en el sector norte de Bogotá.</p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div class="relative md:col-span-1">
+                            <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
+                            <input type="text" id="brand-search-input" onkeyup="filterBrands()" placeholder="Buscar por tienda o especialidad..." class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white text-sm">
+                        </div>
+
+                        <!-- Neighborhood Zone Filter -->
+                        <select id="brand-neighborhood-filter" onchange="filterBrands()" class="px-4 py-3 rounded-xl border border-slate-200 bg-white font-medium text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option value="ALL">📍 Todos los Barrios (Cll 138 - 170)</option>
+                            <option value="Cedritos">Cedritos (Cll 140 - 147)</option>
+                            <option value="Mazurén">Mazurén (Cll 152)</option>
+                            <option value="Toberín">Toberín (Cll 164)</option>
+                            <option value="Colina Campestre">Colina Campestre (Cll 138)</option>
+                            <option value="San José de Bavaria">San José de Bavaria (Cll 170)</option>
+                        </select>
+
+                        <!-- Badge Filter -->
+                        <select id="brand-badge-filter" onchange="filterBrands()" class="px-4 py-3 rounded-xl border border-slate-200 bg-white font-medium text-slate-700 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option value="ALL">Todas las Insignias</option>
+                            <option value="Emprendimiento Local">Emprendimiento Local</option>
+                            <option value="Eco Friendly">Eco Friendly</option>
+                            <option value="Veterinaria & Tienda">Veterinaria & Tienda</option>
+                            <option value="Organización">Refugio / Organización</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Brands Grid -->
+                <div id="brands-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Rendered dynamically -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 3: PRODUCTOS (PRODUCT CATALOG) -->
+        <section id="view-products" class="view-section hidden py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-3xl font-extrabold text-slate-900">Catálogo Bogotá Norte</h1>
+                            <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1 rounded-full">Cll 138 - 170</span>
+                        </div>
+                        <p class="text-slate-500 text-sm">Productos con entrega local o retiro directo en tienda.</p>
+                    </div>
+
+                    <!-- Search & Filter Controls -->
+                    <div class="flex flex-wrap gap-2 w-full md:w-auto">
+                        <div class="relative flex-grow md:w-56">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400"></i>
+                            <input type="text" id="product-search" onkeyup="renderCatalog()" placeholder="Buscar..." class="w-full pl-9 pr-3 py-2 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                        </div>
+
+                        <!-- Zone Filter for Catalog -->
+                        <select id="catalog-neighborhood-filter" onchange="renderCatalog()" class="px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white text-slate-700 font-medium">
+                            <option value="ALL">📍 Sector Norte: Todos</option>
+                            <option value="Cedritos">Cedritos</option>
+                            <option value="Mazurén">Mazurén</option>
+                            <option value="Toberín">Toberín</option>
+                            <option value="Colina Campestre">Colina Campestre</option>
+                            <option value="San José de Bavaria">San José de Bavaria</option>
+                        </select>
+
+                        <select id="catalog-category-filter" onchange="renderCatalog()" class="px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white text-slate-700 font-medium">
+                            <option value="ALL">Todas las Categorías</option>
+                            <option value="Comida">Comida & Snacks</option>
+                            <option value="Juguetes">Teething & Juguetes</option>
+                            <option value="Higiene">Higiene & Salud</option>
+                            <option value="Moda">Moda & Accesorios</option>
+                        </select>
+                        
+                        <select id="catalog-sort" onchange="renderCatalog()" class="px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white text-slate-700 font-medium">
+                            <option value="default">Recomendados</option>
+                            <option value="price-low">Precio: Menor a Mayor</option>
+                            <option value="price-high">Precio: Mayor a Menor</option>
+                            <option value="impact">Mayor Impacto Social</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Active Filters Bar -->
+                <div id="active-category-indicator" class="mb-4 hidden flex items-center gap-2">
+                    <span class="text-xs font-semibold text-slate-500">Filtro activo:</span>
+                    <span id="current-filter-name" class="bg-orange-100 text-orange-800 text-xs font-bold px-2.5 py-1 rounded-full flex items-center gap-1">
+                        <span>Filtro</span>
+                        <button onclick="clearCatalogCategoryFilter()" class="hover:text-red-600"><i class="fa-solid fa-circle-xmark"></i></button>
+                    </span>
+                </div>
+
+                <!-- Product Catalog Grid -->
+                <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Products rendered via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 6: COMUNIDAD E IMPACTO SOCIAL -->
+        <section id="view-community" class="view-section hidden py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header Hub -->
+                <div class="bg-teal-700 text-white rounded-3xl p-6 sm:p-8 mb-8 relative overflow-hidden">
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="bg-teal-600 text-teal-100 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">
+                            <i class="fa-solid fa-heart-pulse mr-1"></i> Red de Bienestar Bogotá Norte
+                        </span>
+                        <h1 class="text-3xl font-extrabold mb-3">Comunidad PetCare Norte & Adopciones</h1>
+                        <p class="text-teal-100 text-sm sm:text-base">
+                            Adopciones en Cedritos y Suba, encuentros caninos en parques del sector e iniciativas para refugios aliados del corredor Cll 138-170.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Community Sub-Tabs -->
+                <div class="flex border-b border-slate-200 mb-6 space-x-4 overflow-x-auto no-scrollbar">
+                    <button onclick="switchCommunityTab('adoption')" id="tab-btn-adoption" class="pb-3 border-b-2 border-teal-600 font-bold text-teal-600 text-sm whitespace-nowrap flex items-center gap-2">
+                        <i class="fa-solid fa-paw"></i> Adopciones Norte
+                    </button>
+                    <button onclick="switchCommunityTab('meetups')" id="tab-btn-meetups" class="pb-3 border-b-2 border-transparent font-semibold text-slate-500 hover:text-slate-800 text-sm whitespace-nowrap flex items-center gap-2">
+                        <i class="fa-solid fa-tree"></i> Parques & Encuentros Pet
+                    </button>
+                    <button onclick="switchCommunityTab('forum')" id="tab-btn-forum" class="pb-3 border-b-2 border-transparent font-semibold text-slate-500 hover:text-slate-800 text-sm whitespace-nowrap flex items-center gap-2">
+                        <i class="fa-solid fa-comments"></i> Foro de Vecinos
+                    </button>
+                    <button onclick="switchCommunityTab('shelters')" id="tab-btn-shelters" class="pb-3 border-b-2 border-transparent font-semibold text-slate-500 hover:text-slate-800 text-sm whitespace-nowrap flex items-center gap-2">
+                        <i class="fa-solid fa-hand-holding-heart"></i> Refugios Aliados
+                    </button>
+                </div>
+
+                <!-- SUB TAB 1: ADOPTION -->
+                <div id="subtab-adoption" class="community-subtab space-y-6">
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h2 class="text-xl font-bold text-slate-900">Mascotas en adopción (Zona Norte)</h2>
+                            <p class="text-xs text-slate-500">Ubicadas en casas de paso en Mazurén, Cedritos y San José de Bavaria.</p>
+                        </div>
+                        <button onclick="openAdoptionModal()" class="px-4 py-2 rounded-xl bg-teal-600 text-white text-sm font-bold hover:bg-teal-700 transition">
+                            <i class="fa-solid fa-plus mr-1"></i> Publicar en Adopción
+                        </button>
+                    </div>
+
+                    <div id="adoption-cards-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Dynamic Adoption items -->
+                    </div>
+                </div>
+
+                <!-- SUB TAB 2: PET MEETUPS IN PARKS -->
+                <div id="subtab-meetups" class="community-subtab hidden space-y-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold text-slate-900">Parques de Encuentro en el Corredor Cll 138-170</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="meetups-grid">
+                        <!-- Rendered via JS -->
+                    </div>
+                </div>
+
+                <!-- SUB TAB 3: FORUM / TIPS -->
+                <div id="subtab-forum" class="community-subtab hidden space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 space-y-4">
+                            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                                <h3 class="text-sm font-bold text-slate-700 mb-2">Publicar mensaje para vecinos del Norte</h3>
+                                <textarea id="forum-input" placeholder="¿Consultas sobre veterinarias en Mazurén, paseadores en Cedritos o etapas de morder (teething)?" class="w-full p-3 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500" rows="3"></textarea>
+                                <div class="flex justify-between items-center mt-3">
+                                    <span class="text-xs text-slate-400"><i class="fa-solid fa-location-dot"></i> Publicando en red Cll 138-170</span>
+                                    <button onclick="postToForum()" class="px-4 py-1.5 rounded-lg bg-orange-600 text-white font-bold text-sm hover:bg-orange-700">Publicar</button>
+                                </div>
+                            </div>
+
+                            <div id="forum-posts-container" class="space-y-4">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Educational Tips Sidebar -->
+                        <div class="space-y-4">
+                            <div class="bg-amber-50 rounded-2xl p-5 border border-amber-200">
+                                <h3 class="font-bold text-amber-900 mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-lightbulb text-amber-600"></i> Etapa de Mordida (Teething)
+                                </h3>
+                                <p class="text-xs text-amber-800 leading-relaxed mb-3">
+                                    En los cachorros de 3 a 7 meses, la inflamación de encías genera ansiedad por morder. Encuentra mordedores de caucho orgánico en tiendas de Cedritos y Mazurén.
+                                </p>
+                                <button onclick="filterByCategory('Juguetes')" class="text-xs font-bold text-amber-700 hover:underline">Ver Mordedores Teething &rarr;</button>
+                            </div>
+
+                            <div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-200">
+                                <h3 class="font-bold text-emerald-900 mb-2 flex items-center gap-2">
+                                    <i class="fa-solid fa-shield-heart text-emerald-600"></i> Nutrición Sostenible
+                                </h3>
+                                <p class="text-xs text-emerald-800 leading-relaxed">
+                                    Las marcas locales de Toberín y San José ofrecen dietas deshidratadas libres de conservantes químicos con entregas sin costo de envío por compras mayores a $40.000 COP.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUB TAB 4: SHELTERS & INITIATIVES -->
+                <div id="subtab-shelters" class="community-subtab hidden space-y-6">
+                    <div id="shelter-initiatives-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Dynamic render -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIEW 7: MI CUENTA (USER PROFILE & SHOP DASHBOARD) -->
+        <section id="view-account" class="view-section hidden py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+                <!-- User Type Selector / Header -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200 shadow-sm mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="flex items-center gap-4">
+                        <img id="user-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Usuario" class="w-16 h-16 rounded-2xl object-cover border-2 border-orange-500">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h1 id="user-name-title" class="text-xl font-extrabold text-slate-900">Camila Rodríguez</h1>
+                                <span class="bg-slate-100 text-slate-600 text-[10px] font-bold px-2 py-0.5 rounded-md">📍 Cedritos (Cll 142)</span>
+                            </div>
+                            <p id="user-type-subtitle" class="text-xs font-bold text-orange-600 uppercase tracking-wide">Dueño de Mascota en Bogotá Norte</p>
+                        </div>
+                    </div>
+
+                    <!-- Role Toggle Button -->
+                    <div class="bg-slate-100 p-1 rounded-xl flex items-center">
+                        <button id="role-btn-owner" onclick="switchUserRole('owner')" class="px-4 py-2 rounded-lg font-bold text-xs transition bg-white text-slate-800 shadow-sm">
+                            <i class="fa-solid fa-paw mr-1"></i> Dueño de Mascota
+                        </button>
+                        <button id="role-btn-vendor" onclick="switchUserRole('vendor')" class="px-4 py-2 rounded-lg font-bold text-xs text-slate-500 transition hover:text-slate-800">
+                            <i class="fa-solid fa-store mr-1"></i> Mi Tienda Local (Cll 138-170)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD ROLE 1: DUEÑO DE MASCOTA -->
+                <div id="dashboard-owner" class="space-y-6">
+                    <!-- Address Config Box -->
+                    <div class="bg-orange-50 border border-orange-200 p-4 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-orange-500 text-white flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-orange-900">Dirección de Entrega Registrada</h4>
+                                <p class="text-xs text-orange-800">Calle 142 #19-38, Apto 402, Barrio Cedritos, Bogotá</p>
+                            </div>
+                        </div>
+                        <button onclick="alertModal('Actualizar Ubicación', 'Puedes ajustar tu dirección dentro del rango Calle 138 a 170 para calcular tiempos de despacho local.')" class="px-3 py-1.5 bg-white text-orange-700 font-bold text-xs rounded-xl border border-orange-200 hover:bg-orange-100">
+                            Cambiar Dirección
+                        </button>
+                    </div>
+
+                    <!-- My Pets Grid -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="font-extrabold text-slate-900 text-lg">Mis Mascotas Registradas</h2>
+                            <button onclick="alertModal('Registro de Mascota', 'Función para registrar una nueva mascota y sus datos médicos.')" class="px-3 py-1.5 rounded-lg bg-orange-100 text-orange-700 font-bold text-xs hover:bg-orange-200">+ Agregar Mascota</button>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 bg-slate-50">
+                                <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=200&q=80" class="w-12 h-12 rounded-xl object-cover" alt="Bruno">
+                                <div>
+                                    <h3 class="font-bold text-sm text-slate-800">Bruno</h3>
+                                    <p class="text-xs text-slate-500">Beagle &bull; 2 Años (Vet: Mazurén)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 rounded-xl border border-slate-100 bg-slate-50">
+                                <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&w=200&q=80" class="w-12 h-12 rounded-xl object-cover" alt="Misha">
+                                <div>
+                                    <h3 class="font-bold text-sm text-slate-800">Misha</h3>
+                                    <p class="text-xs text-slate-500">Gata Mestiza &bull; 1 Año</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Orders & Social Impact Summary -->
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-2xl p-6 border border-slate-200">
+                            <h2 class="font-extrabold text-slate-900 text-lg mb-4">Mis Compras Recientes (Locales)</h2>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center p-3 rounded-xl border border-slate-100 text-sm">
+                                    <div>
+                                        <p class="font-bold text-slate-800">Orden #BOG-9021</p>
+                                        <p class="text-xs text-slate-500">EcoPaw Cedritos (Cll 140)</p>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-extrabold text-orange-600">$23.50</p>
+                                        <span class="text-[10px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full font-bold">Entregado</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Personal Impact Metric -->
+                        <div class="bg-gradient-to-br from-teal-600 to-emerald-700 text-white rounded-2xl p-6">
+                            <span class="text-xs font-bold bg-white/20 px-2.5 py-1 rounded-full uppercase">Tu Aporte a Causa Norte</span>
+                            <h3 class="text-2xl font-extrabold mt-3">$14.20 USD</h3>
+                            <p class="text-xs text-teal-100 mt-1">Donación acumulada derivada de tus compras locales en tiendas de Cll 138-170.</p>
+                            <div class="mt-4 pt-4 border-t border-teal-500/50 flex justify-between text-xs font-medium">
+                                <span>Refugio: "Peluditos Norte Bogotá"</span>
+                                <i class="fa-solid fa-heart text-pink-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD ROLE 2: EMPRENDEDOR / TIENDA -->
+                <div id="dashboard-vendor" class="hidden space-y-6">
+                    <!-- Shop Metrics Header -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200">
+                            <span class="text-xs text-slate-500 font-bold uppercase">Ventas Sector Norte</span>
+                            <h3 class="text-2xl font-extrabold text-slate-900 mt-1">$1,280.00</h3>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200">
+                            <span class="text-xs text-slate-500 font-bold uppercase">Aporte a Refugios (8%)</span>
+                            <h3 class="text-2xl font-extrabold text-teal-600 mt-1">$102.40</h3>
+                        </div>
+                        <div class="bg-white p-5 rounded-2xl border border-slate-200">
+                            <span class="text-xs text-slate-500 font-bold uppercase">Barrio Registrado</span>
+                            <h3 class="text-lg font-extrabold text-orange-600 mt-1">Cedritos (Cll 140)</h3>
+                        </div>
+                    </div>
+
+                    <!-- Catalog Management -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="font-extrabold text-slate-900 text-lg">Administrar Catálogo de Mi Tienda</h2>
+                                <p class="text-xs text-slate-500">Ubicada en el corredor Cll 138 a 170.</p>
+                            </div>
+                            <button onclick="openAddProductModal()" class="px-4 py-2 rounded-xl bg-orange-600 text-white font-bold text-xs hover:bg-orange-700 shadow-md">
+                                <i class="fa-solid fa-plus mr-1"></i> Publicar Producto
+                            </button>
+                        </div>
+
+                        <!-- Vendor Items Table/List -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-slate-200 text-xs text-slate-400 uppercase font-bold">
+                                        <th class="py-3 px-2">Producto</th>
+                                        <th class="py-3 px-2">Categoría</th>
+                                        <th class="py-3 px-2">Precio</th>
+                                        <th class="py-3 px-2">% Impacto</th>
+                                        <th class="py-3 px-2 text-right">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="vendor-product-rows" class="divide-y divide-slate-100 text-sm">
+                                    <!-- Rendered dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-10 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="space-y-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-orange-500 flex items-center justify-center text-white font-bold">
+                        <i class="fa-solid fa-paw"></i>
+                    </div>
+                    <span class="text-lg font-bold text-white">PetCare Bogotá Norte</span>
+                </div>
+                <p>Red local de comercio, adopción e impacto social enfocada en el corredor vial entre la Calle 138 y la Calle 170.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-3">Barrios Cobertura</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" onclick="filterByNeighborhood('Cedritos')" class="hover:underline">Cedritos (Cll 140 - 147)</a></li>
+                    <li><a href="#" onclick="filterByNeighborhood('Mazurén')" class="hover:underline">Mazurén (Cll 152)</a></li>
+                    <li><a href="#" onclick="filterByNeighborhood('Toberín')" class="hover:underline">Toberín (Cll 164)</a></li>
+                    <li><a href="#" onclick="filterByNeighborhood('Colina Campestre')" class="hover:underline">Colina Campestre (Cll 138)</a></li>
+                    <li><a href="#" onclick="filterByNeighborhood('San José de Bavaria')" class="hover:underline">San José de Bavaria (Cll 170)</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-3">Emprendedores Norte</h4>
+                <ul class="space-y-2">
+                    <li><a href="#" onclick="navigateTo('account')" class="hover:underline">Registrar mi Tienda Local</a></li>
+                    <li><a href="#" class="hover:underline">Puntos de Recogida (Pick-up)</a></li>
+                    <li><a href="#" class="hover:underline">Sellos de Impacto Animal</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-3">Impacto Local</h4>
+                <p class="leading-relaxed">Apoyamos a la Fundación Peluditos Norte Bogotá y a rescates de la zona sabana norte.</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-6 border-t border-slate-800 text-center">
+            <p>&copy; 2026 PetCare Bogotá - Red de Comercio & Impacto Animal Norte (Calle 138 - Calle 170).</p>
+        </div>
+    </footer>
+
+    <!-- MODAL: PRODUCT DETAIL VIEW -->
+    <div id="modal-product-detail" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative shadow-2xl animate-fade-in">
+            <button onclick="closeModal('modal-product-detail')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="product-detail-content">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: BRAND PROFILE VIEW -->
+    <div id="modal-brand-profile" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl">
+            <button onclick="closeModal('modal-brand-profile')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div id="brand-profile-content">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: SHOPPING CART -->
+    <div id="modal-cart" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex justify-end hidden">
+        <div class="bg-white w-full max-w-md h-full p-6 flex flex-col justify-between overflow-y-auto shadow-2xl">
+            <div>
+                <div class="flex justify-between items-center border-b border-slate-200 pb-4 mb-4">
+                    <div>
+                        <h2 class="text-xl font-extrabold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-bag-shopping text-orange-600"></i> Carrito de Compras
+                        </h2>
+                        <span class="text-xs text-slate-500">Despachos en Bogotá Norte (Cll 138-170)</span>
+                    </div>
+                    <button onclick="closeModal('modal-cart')" class="text-slate-400 hover:text-slate-700 text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <div id="cart-items-container" class="space-y-4">
+                    <!-- Rendered cart items -->
+                </div>
+            </div>
+
+            <!-- Cart Footer Summary -->
+            <div class="border-t border-slate-200 pt-4 mt-6 space-y-3">
+                <div class="bg-emerald-50 rounded-xl p-3 border border-emerald-200 text-xs space-y-1">
+                    <div class="flex justify-between font-bold text-emerald-900">
+                        <span><i class="fa-solid fa-truck-ramp-box mr-1"></i> Método de Entrega:</span>
+                        <span>Domicilio Exprés Cll 138-170</span>
+                    </div>
+                    <p class="text-[11px] text-emerald-700">Tiempo estimado: 45 - 90 minutos.</p>
+                </div>
+
+                <div class="bg-orange-50 rounded-xl p-3 border border-orange-200 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-hand-holding-heart text-orange-600 text-lg"></i>
+                        <div>
+                            <p class="text-xs font-bold text-orange-900">Aporte Causa Animal Norte</p>
+                            <p class="text-[11px] text-orange-700">Refugio Peluditos Norte Bogotá</p>
+                        </div>
+                    </div>
+                    <span id="cart-impact-donation" class="text-sm font-extrabold text-orange-700">$0.00</span>
+                </div>
+
+                <div class="flex justify-between text-base font-extrabold text-slate-900 pt-2">
+                    <span>Total a pagar:</span>
+                    <span id="cart-total-price">$0.00</span>
+                </div>
+
+                <button onclick="checkoutCart()" class="w-full py-3.5 rounded-xl bg-orange-600 hover:bg-orange-700 text-white font-extrabold shadow-lg shadow-orange-200 transition">
+                    Confirmar Pedido Local
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: ADD PRODUCT (VENDOR) -->
+    <div id="modal-add-product" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 relative shadow-2xl">
+            <button onclick="closeModal('modal-add-product')" class="absolute top-4 right-4 text-slate-400 hover:text-slate-700 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h2 class="text-xl font-extrabold text-slate-900 mb-1">Publicar Producto Local</h2>
+            <p class="text-xs text-slate-500 mb-4">Ubicación de tu establecimiento: Corredor Cll 138-170.</p>
+            
+            <form id="form-add-product" onsubmit="handleSaveProduct(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Nombre del Producto</label>
+                    <input type="text" id="new-prod-name" required class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Precio ($ USD / COP equiv.)</label>
+                        <input type="number" step="0.01" id="new-prod-price" required class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 mb-1">Categoría</label>
+                        <select id="new-prod-category" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500">
+                            <option value="Comida">Comida & Snacks</option>
+                            <option value="Juguetes">Teething & Juguetes</option>
+                            <option value="Higiene">Higiene & Salud</option>
+                            <option value="Moda">Moda & Accesorios</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">% Donación a Causa Animal Norte</label>
+                    <input type="number" min="3" max="50" id="new-prod-impact" value="8" class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">URL Imagen (Opcional)</label>
+                    <input type="url" id="new-prod-img" placeholder="https://..." class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">Descripción</label>
+                    <textarea id="new-prod-desc" rows="3" required class="w-full px-3 py-2 text-sm border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl shadow-md transition">
+                    Guardar y Publicar en Bogotá Norte
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: GENERAL PURPOSE ALERT/CONFIRMATION -->
+    <div id="modal-alert" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl">
+            <div class="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center text-xl mx-auto mb-3">
+                <i class="fa-solid fa-circle-info"></i>
+            </div>
+            <h3 id="alert-title" class="text-lg font-bold text-slate-900 mb-2">Mensaje</h3>
+            <p id="alert-message" class="text-xs text-slate-600 mb-6">Información importante.</p>
+            <button onclick="closeModal('modal-alert')" class="w-full py-2.5 rounded-xl bg-orange-600 text-white font-bold text-sm hover:bg-orange-700">Entendido</button>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        /* --- STATE MANAGEMENT --- */
+        let activeView = 'home';
+        let currentRole = 'owner';
+        let cart = [];
+
+        // Stores & Brands located strictly between Calle 138 and Calle 170 in Bogotá
+        const brandsData = [
+            {
+                id: 'b1',
+                name: 'EcoPaw Cedritos',
+                badge: 'Eco Friendly',
+                neighborhood: 'Cedritos',
+                address: 'Calle 140 #11-45, Cedritos',
+                zoneTag: '📍 Cll 140 #11-45 (Cedritos)',
+                rating: 4.9,
+                logo: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&w=150&q=80',
+                description: 'Accesorios sostenibles, arneses y mordedores ecológicos de mordida (teething) producidos con fibra de bambú.',
+                impactContribution: '8% a Fundación Peluditos Norte Bogotá.',
+                whatsapp: '+573001234567',
+                instagram: '@ecopaw_cedritos'
+            },
+            {
+                id: 'b2',
+                name: 'NutriPet Mazurén',
+                badge: 'Emprendimiento Local',
+                neighborhood: 'Mazurén',
+                address: 'Calle 152 #45-18, Mazurén',
+                zoneTag: '📍 Cll 152 #45-18 (Mazurén)',
+                rating: 4.8,
+                logo: 'https://images.unsplash.com/photo-1548767797-d8c844163c4c?auto=format&fit=crop&w=150&q=80',
+                description: 'Snacks deshidratados 100% naturales para entrenamiento y nutrición holística sin grano.',
+                impactContribution: '5% a campañas de vacunación en Suba.',
+                whatsapp: '+573109876543',
+                instagram: '@nutripet_mazuren'
+            },
+            {
+                id: 'b3',
+                name: 'Vet & Pet Toberín',
+                badge: 'Veterinaria & Tienda',
+                neighborhood: 'Toberín',
+                address: 'Calle 164 #19A-32, Toberín',
+                zoneTag: '📍 Cll 164 #19A-32 (Toberín)',
+                rating: 4.9,
+                logo: 'https://images.unsplash.com/photo-1628009368231-7bb7cfcb0def?auto=format&fit=crop&w=150&q=80',
+                description: 'Atención médica veterinaria especializada, grooming profiláctico y productos de farmacia para mascotas.',
+                impactContribution: 'Atención esterilización gratuita a animales de callejeritos de la Cll 170.',
+                whatsapp: '+573154445566',
+                instagram: '@vet_toberin'
+            },
+            {
+                id: 'b4',
+                name: 'Retro Tail Colina',
+                badge: 'Emprendimiento Local',
+                neighborhood: 'Colina Campestre',
+                address: 'Calle 138 #58-05, Colina Campestre',
+                zoneTag: '📍 Cll 138 #58-05 (Colina)',
+                rating: 4.7,
+                logo: 'https://images.unsplash.com/photo-1535930891776-0c2dfb7fda1a?auto=format&fit=crop&w=150&q=80',
+                description: 'Ropa, impermeables para lluvia bogotana y bandanas vintage confeccionadas por abuelas locales.',
+                impactContribution: '5% a comedores comunitarios caninos.',
+                whatsapp: '+573014443322',
+                instagram: '@retrotail_colina'
+            },
+            {
+                id: 'b5',
+                name: 'Fundación Peluditos Norte Bogotá',
+                badge: 'Organización',
+                neighborhood: 'San José de Bavaria',
+                address: 'Calle 170 #58-20, San José de Bavaria',
+                zoneTag: '📍 Cll 170 #58-20 (San José)',
+                rating: 5.0,
+                logo: 'https://images.unsplash.com/photo-1601758228041-f3b2795255f1?auto=format&fit=crop&w=150&q=80',
+                description: 'Refugio y hogar de paso para animales rescatados en el norte de Bogotá y sabana centro.',
+                impactContribution: 'Receptor directo de donaciones PetCare.',
+                whatsapp: '+573205554433',
+                instagram: '@peluditos_nortebogota'
+            }
+        ];
+
+        // Products catalogue tied to stores between Cll 138 and 170
+        let productsData = [
+            {
+                id: 'p1',
+                brandId: 'b1',
+                brandName: 'EcoPaw Cedritos',
+                neighborhood: 'Cedritos',
+                zoneTag: '📍 Cedritos (Cll 140)',
+                name: 'Anillo Teething Caucho Orgánico Congelable',
+                category: 'Juguetes',
+                price: 12.50,
+                rating: 4.9,
+                impactPercent: 8,
+                image: 'https://images.unsplash.com/photo-1576201836106-db1758fd1c97?auto=format&fit=crop&w=400&q=80',
+                description: 'Ideal para la etapa de mordida (teething) en cachorros. Diseñado para congelar y aliviar la inflamación de encías.'
+            },
+            {
+                id: 'p2',
+                brandId: 'b2',
+                brandName: 'NutriPet Mazurén',
+                neighborhood: 'Mazurén',
+                zoneTag: '📍 Mazurén (Cll 152)',
+                name: 'Snacks Deshidratados Hígado 100g (Bogotá Natural)',
+                category: 'Comida',
+                price: 8.90,
+                rating: 4.8,
+                impactPercent: 5,
+                image: 'https://images.unsplash.com/photo-1582515073490-39981397c445?auto=format&fit=crop&w=400&q=80',
+                description: 'Premios de entrenamiento mono-proteicos deshidratados en frío. Elaborados en el taller artesanal de Mazurén.'
+            },
+            {
+                id: 'p3',
+                brandId: 'b4',
+                brandName: 'Retro Tail Colina',
+                neighborhood: 'Colina Campestre',
+                zoneTag: '📍 Colina (Cll 138)',
+                name: 'Capota Impermeable Lluvia Bogotana para Perro',
+                category: 'Moda',
+                price: 18.50,
+                rating: 4.8,
+                impactPercent: 5,
+                image: 'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=400&q=80',
+                description: 'Chaqueta térmica e impermeable diseñada para los días fríos y de lluvia en el norte de Bogotá.'
+            },
+            {
+                id: 'p4',
+                brandId: 'b3',
+                brandName: 'Vet & Pet Toberín',
+                neighborhood: 'Toberín',
+                zoneTag: '📍 Toberín (Cll 164)',
+                name: 'Champú Sólido Piel Sensible y Caléndula',
+                category: 'Higiene',
+                price: 11.00,
+                rating: 5.0,
+                impactPercent: 10,
+                image: 'https://images.unsplash.com/photo-1608248597309-a1d2931a2931?auto=format&fit=crop&w=400&q=80',
+                description: 'Jabón medicinal artesanal recomendado por veterinarios de Toberín para perritos con alergias atópicas.'
+            },
+            {
+                id: 'p5',
+                brandId: 'b2',
+                brandName: 'NutriPet Mazurén',
+                neighborhood: 'Mazurén',
+                zoneTag: '📍 Mazurén (Cll 152)',
+                name: 'Alimento Holístico Pollo & Avena 3kg',
+                category: 'Comida',
+                price: 32.00,
+                rating: 4.9,
+                impactPercent: 6,
+                image: 'https://images.unsplash.com/photo-1589924691995-400dc9ecc119?auto=format&fit=crop&w=400&q=80',
+                description: 'Alimento libre de saborizantes artificiales. Entrega gratis en barrios entre Calle 138 y 170.'
+            }
+        ];
+
+        // Adoption Pets (Northern corridor)
+        const adoptionPets = [
+            {
+                name: 'Apolo',
+                type: 'Perro - Mestizo',
+                age: '1.5 Años',
+                shelter: 'Casa de Paso Cedritos (Cll 142)',
+                image: 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&w=400&q=80',
+                desc: 'Rescatado cerca a la Estación Toberín. Activo, amoroso y vacunado al día.'
+            },
+            {
+                name: 'Luna',
+                type: 'Gata - Doméstica',
+                age: '8 Meses',
+                shelter: 'Fundación Peluditos San José (Cll 170)',
+                image: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=400&q=80',
+                desc: 'Esterilizada y sociable. Actualmente habita en hogar de paso en Colina Campestre.'
+            }
+        ];
+
+        // Pet Meetup Parks in Cll 138 - 170 Corridor
+        const petParks = [
+            {
+                name: 'Parque Cedolfines (Cedritos)',
+                location: 'Calle 144 con Carrera 17',
+                time: 'Sábados y Domingos 10:00 AM',
+                desc: 'Zona canina delimitada con obstáculos de agilidad. Excelente punto de socialización para cachorros.'
+            },
+            {
+                name: 'Parque Mazurén',
+                location: 'Calle 152 con Carrera 49',
+                time: 'Todos los días 4:30 PM',
+                desc: 'Amplias zonas verdes iluminadas ideales para paseos nocturnos seguros.'
+            },
+            {
+                name: 'Parque Colina Campestre',
+                location: 'Calle 138 con Carrera 58A',
+                time: 'Domingos 11:00 AM',
+                desc: 'Lugar de reunión de la comunidad PetCare para jornadas informativas de adopción.'
+            }
+        ];
+
+        // Community Forum Posts
+        let forumPosts = [
+            {
+                author: 'Carlos M. (Cedritos)',
+                pet: 'Tobby (Golden Cachorro)',
+                time: 'Hace 2 horas',
+                content: '¿Algún vecino de la Calle 140 que me recomiende un buen mordedor para la etapa de morder (teething)? Mi perrito está rompiendo muebles.',
+                likes: 8
+            },
+            {
+                author: 'Dra. Andrea Ruiz (Vet Toberín)',
+                pet: 'Veterinaria Aliada Cll 164',
+                time: 'Hace 4 horas',
+                content: 'Vecinos de la zona norte: Recuerden que este fin de semana tendremos jornada de desparasitación gratuita en la veterinaria de Toberín.',
+                likes: 24
+            }
+        ];
+
+        /* --- NAVIGATION SYSTEM --- */
+        function navigateTo(viewId) {
+            activeView = viewId;
+            document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+            
+            const target = document.getElementById(`view-${viewId}`);
+            if(target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.classList.remove('text-orange-600', 'bg-orange-50');
+            });
+            const activeNavBtn = document.getElementById(`nav-${viewId}`);
+            if(activeNavBtn) activeNavBtn.classList.add('text-orange-600', 'bg-orange-50');
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (viewId === 'home') renderFeaturedProducts();
+            if (viewId === 'brands') renderBrandsList(brandsData);
+            if (viewId === 'products') renderCatalog();
+            if (viewId === 'community') renderCommunityTab();
+            if (viewId === 'account') renderVendorTable();
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        /* --- FEATURED PRODUCTS RENDER (HOME) --- */
+        function renderFeaturedProducts() {
+            const container = document.getElementById('home-featured-products');
+            container.innerHTML = '';
+
+            productsData.slice(0, 4).forEach(prod => {
+                container.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition p-4 flex flex-col justify-between group">
+                        <div>
+                            <div class="relative overflow-hidden rounded-xl mb-3 h-44 bg-slate-100">
+                                <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                                <span class="absolute top-2 left-2 bg-teal-600 text-white text-[10px] font-extrabold px-2 py-1 rounded-md shadow-sm">
+                                    <i class="fa-solid fa-heart"></i> ${prod.impactPercent}% Refugios
+                                </span>
+                                <span class="absolute bottom-2 left-2 bg-slate-900/80 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-0.5 rounded-md">
+                                    ${prod.zoneTag}
+                                </span>
+                            </div>
+                            <span class="text-[11px] font-bold text-orange-600 uppercase tracking-wider">${prod.category}</span>
+                            <h3 class="font-bold text-slate-800 text-sm mt-0.5 line-clamp-1">${prod.name}</h3>
+                            <p class="text-xs text-slate-400 mt-1"><i class="fa-solid fa-shop mr-1"></i>${prod.brandName}</p>
+                        </div>
+                        <div class="mt-4 flex items-center justify-between border-t border-slate-100 pt-3">
+                            <span class="text-lg font-extrabold text-slate-900">$${prod.price.toFixed(2)}</span>
+                            <button onclick="openProductDetail('${prod.id}')" class="px-3 py-1.5 rounded-lg bg-orange-100 text-orange-700 hover:bg-orange-600 hover:text-white font-bold text-xs transition">
+                                Ver Detalle
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        /* --- BRANDS DIRECTORY LOGIC --- */
+        function renderBrandsList(data) {
+            const container = document.getElementById('brands-grid');
+            container.innerHTML = '';
+
+            if(data.length === 0) {
+                container.innerHTML = `<div class="col-span-full text-center py-8 text-slate-400">No se encontraron tiendas en este sector.</div>`;
+                return;
+            }
+
+            data.forEach(b => {
+                let badgeColor = 'bg-orange-100 text-orange-700';
+                if(b.badge === 'Eco Friendly') badgeColor = 'bg-emerald-100 text-emerald-700';
+                if(b.badge === 'Organización') badgeColor = 'bg-teal-100 text-teal-800';
+                if(b.badge === 'Veterinaria & Tienda') badgeColor = 'bg-blue-100 text-blue-800';
+
+                container.innerHTML += `
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-start gap-4 mb-3">
+                                <img src="${b.logo}" class="w-14 h-14 rounded-2xl object-cover border border-slate-200" alt="${b.name}">
+                                <div>
+                                    <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full ${badgeColor}">${b.badge}</span>
+                                    <h3 class="font-extrabold text-slate-900 text-base mt-1">${b.name}</h3>
+                                    <p class="text-xs font-bold text-orange-600"><i class="fa-solid fa-location-dot mr-1"></i>${b.address}</p>
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-600 line-clamp-2 mb-3">${b.description}</p>
+                            <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-100 text-xs text-slate-500 mb-4">
+                                <strong class="text-teal-700 font-bold"><i class="fa-solid fa-hand-holding-heart mr-1"></i> Causa Cll 138-170:</strong> ${b.impactContribution}
+                            </div>
+                        </div>
+                        <div class="flex gap-2">
+                            <button onclick="openBrandProfile('${b.id}')" class="w-full py-2.5 rounded-xl bg-slate-900 text-white hover:bg-orange-600 font-bold text-xs transition">
+                                Ver Tienda & Dirección
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function filterBrands() {
+            const search = document.getElementById('brand-search-input').value.toLowerCase();
+            const neighFilter = document.getElementById('brand-neighborhood-filter').value;
+            const badgeFilter = document.getElementById('brand-badge-filter').value;
+
+            const filtered = brandsData.filter(b => {
+                const matchSearch = b.name.toLowerCase().includes(search) || b.description.toLowerCase().includes(search) || b.address.toLowerCase().includes(search);
+                const matchNeigh = (neighFilter === 'ALL') || (b.neighborhood === neighFilter);
+                const matchBadge = (badgeFilter === 'ALL') || (b.badge === badgeFilter);
+                return matchSearch && matchNeigh && matchBadge;
+            });
+
+            renderBrandsList(filtered);
+        }
+
+        function filterByNeighborhood(neighName) {
+            document.getElementById('brand-neighborhood-filter').value = neighName;
+            navigateTo('brands');
+            filterBrands();
+        }
+
+        /* --- CATALOG & FILTER SYSTEM --- */
+        let activeCategoryFilter = 'ALL';
+
+        function filterByCategory(catName) {
+            activeCategoryFilter = catName;
+            document.getElementById('catalog-category-filter').value = catName;
+            navigateTo('products');
+        }
+
+        function clearCatalogCategoryFilter() {
+            activeCategoryFilter = 'ALL';
+            document.getElementById('catalog-category-filter').value = 'ALL';
+            document.getElementById('catalog-neighborhood-filter').value = 'ALL';
+            renderCatalog();
+        }
+
+        function renderCatalog() {
+            const search = document.getElementById('product-search').value.toLowerCase();
+            const catSelect = document.getElementById('catalog-category-filter').value;
+            const neighSelect = document.getElementById('catalog-neighborhood-filter').value;
+            const sortSelect = document.getElementById('catalog-sort').value;
+
+            activeCategoryFilter = catSelect;
+
+            const ind = document.getElementById('active-category-indicator');
+            if(activeCategoryFilter !== 'ALL' || neighSelect !== 'ALL') {
+                ind.classList.remove('hidden');
+                document.getElementById('current-filter-name').innerHTML = `${activeCategoryFilter !== 'ALL' ? activeCategoryFilter : ''} ${neighSelect !== 'ALL' ? '📍 ' + neighSelect : ''} <button onclick="clearCatalogCategoryFilter()" class="ml-1 text-xs"><i class="fa-solid fa-xmark"></i></button>`;
+            } else {
+                ind.classList.add('hidden');
+            }
+
+            let filtered = productsData.filter(p => {
+                const matchSearch = p.name.toLowerCase().includes(search) || p.description.toLowerCase().includes(search);
+                const matchCat = (activeCategoryFilter === 'ALL') || (p.category === activeCategoryFilter);
+                const matchNeigh = (neighSelect === 'ALL') || (p.neighborhood === neighSelect);
+                return matchSearch && matchCat && matchNeigh;
+            });
+
+            if(sortSelect === 'price-low') filtered.sort((a,b) => a.price - b.price);
+            if(sortSelect === 'price-high') filtered.sort((a,b) => b.price - a.price);
+            if(sortSelect === 'impact') filtered.sort((a,b) => b.impactPercent - a.impactPercent);
+
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            if(filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400">
+                    <i class="fa-solid fa-paw text-4xl mb-2"></i>
+                    <p>No se encontraron productos en este sector o categoría.</p>
+                </div>`;
+                return;
+            }
+
+            filtered.forEach(p => {
+                grid.innerHTML += `
+                    <div class="bg-white rounded-2xl border border-slate-200 p-4 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+                        <div>
+                            <div class="relative overflow-hidden rounded-xl mb-3 h-48 bg-slate-100">
+                                <img src="${p.image}" alt="${p.name}" class="w-full h-full object-cover">
+                                <span class="absolute top-2 right-2 bg-slate-900/80 backdrop-blur-sm text-white text-[10px] font-bold px-2 py-1 rounded-md">
+                                    <i class="fa-solid fa-heart text-teal-400 mr-1"></i>${p.impactPercent}% Causa
+                                </span>
+                                <span class="absolute bottom-2 left-2 bg-orange-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-md shadow-sm">
+                                    ${p.zoneTag}
+                                </span>
+                            </div>
+                            <span class="text-[10px] font-extrabold text-orange-600 uppercase tracking-wider">${p.category}</span>
+                            <h3 class="font-extrabold text-slate-900 text-sm mt-1">${p.name}</h3>
+                            <p class="text-xs text-slate-400 mt-1">${p.brandName}</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-lg font-extrabold text-slate-900">$${p.price.toFixed(2)}</span>
+                            <div class="flex gap-1">
+                                <button onclick="openProductDetail('${p.id}')" class="p-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button onclick="addToCart('${p.id}')" class="px-3 py-2 rounded-xl bg-orange-600 text-white font-bold text-xs hover:bg-orange-700 transition">
+                                    + Agregar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        /* --- MODAL DETALLE DE PRODUCTO --- */
+        function openProductDetail(prodId) {
+            const prod = productsData.find(p => p.id === prodId);
+            if(!prod) return;
+
+            const content = document.getElementById('product-detail-content');
+            content.innerHTML = `
+                <div class="grid md:grid-cols-2 gap-6 items-center">
+                    <img src="${prod.image}" class="w-full h-64 md:h-80 object-cover rounded-2xl" alt="${prod.name}">
+                    <div class="space-y-4">
+                        <div>
+                            <span class="text-xs font-bold bg-orange-100 text-orange-800 px-2.5 py-1 rounded-full inline-block mb-1">${prod.zoneTag}</span>
+                            <h2 class="text-xl font-extrabold text-slate-900">${prod.name}</h2>
+                            <p class="text-xs text-slate-500 mt-1">Tienda local: <strong class="text-slate-800">${prod.brandName}</strong></p>
+                        </div>
+
+                        <div class="bg-teal-50 border border-teal-200 p-3 rounded-xl flex items-center gap-3">
+                            <i class="fa-solid fa-shield-heart text-teal-600 text-2xl"></i>
+                            <div>
+                                <p class="text-xs font-bold text-teal-900">Impacto en Bogotá Norte</p>
+                                <p class="text-[11px] text-teal-700">El ${prod.impactPercent}% se destina directamente al refugio Peluditos Norte Bogotá.</p>
+                            </div>
+                        </div>
+
+                        <p class="text-xs text-slate-600 leading-relaxed">${prod.description}</p>
+
+                        <div class="text-2xl font-extrabold text-slate-900">$${prod.price.toFixed(2)} USD</div>
+
+                        <div class="flex gap-2 pt-2">
+                            <button onclick="addToCart('${prod.id}'); closeModal('modal-product-detail')" class="flex-1 py-3 bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm rounded-xl transition shadow-md">
+                                <i class="fa-solid fa-cart-plus mr-1"></i> Añadir para Domicilio Local
+                            </button>
+                            <a href="https://wa.me/573001234567?text=Hola%20${encodeURIComponent(prod.brandName)},%20quisiera%20consultar%20por%20${encodeURIComponent(prod.name)}" target="_blank" class="px-4 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm rounded-xl transition flex items-center justify-center">
+                                <i class="fa-brands fa-whatsapp text-lg"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal-product-detail').classList.remove('hidden');
+        }
+
+        /* --- MODAL PERFIL DE TIENDA / BRAND --- */
+        function openBrandProfile(brandId) {
+            const brand = brandsData.find(b => b.id === brandId);
+            if(!brand) return;
+
+            const brandProducts = productsData.filter(p => p.brandId === brandId);
+
+            let productsHTML = brandProducts.map(p => `
+                <div class="border border-slate-100 p-3 rounded-xl flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img src="${p.image}" class="w-12 h-12 rounded-lg object-cover">
+                        <div>
+                            <h4 class="font-bold text-xs text-slate-800">${p.name}</h4>
+                            <span class="text-xs text-orange-600 font-extrabold">$${p.price.toFixed(2)}</span>
+                        </div>
+                    </div>
+                    <button onclick="addToCart('${p.id}')" class="px-3 py-1 rounded-lg bg-orange-100 text-orange-700 font-bold text-xs hover:bg-orange-600 hover:text-white">
+                        + Agregar
+                    </button>
+                </div>
+            `).join('');
+
+            if(brandProducts.length === 0) productsHTML = '<p class="text-xs text-slate-400">Esta tienda aún no tiene productos registrados en catálogo.</p>';
+
+            const content = document.getElementById('brand-profile-content');
+            content.innerHTML = `
+                <div class="space-y-6">
+                    <div class="flex items-start gap-4">
+                        <img src="${brand.logo}" class="w-20 h-20 rounded-2xl object-cover border-2 border-orange-200">
+                        <div>
+                            <span class="text-xs font-bold bg-orange-100 text-orange-700 px-2.5 py-0.5 rounded-full">${brand.badge}</span>
+                            <h2 class="text-2xl font-extrabold text-slate-900 mt-1">${brand.name}</h2>
+                            <p class="text-xs font-bold text-slate-700 mt-0.5"><i class="fa-solid fa-location-dot text-orange-600 mr-1"></i>Dirección: ${brand.address}</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                        <h4 class="font-bold text-slate-800 text-xs uppercase mb-1">Misión y Cobertura Local</h4>
+                        <p class="text-xs text-slate-600 leading-relaxed mb-2">${brand.description}</p>
+                        <div class="text-xs text-teal-700 font-bold bg-teal-50 p-2 rounded-lg border border-teal-100">
+                            <i class="fa-solid fa-hand-holding-heart mr-1"></i> Aporte local: ${brand.impactContribution}
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-slate-900 text-sm mb-3">Catálogo en Establecimiento</h3>
+                        <div class="space-y-2">
+                            ${productsHTML}
+                        </div>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-100 text-xs">
+                        <span class="text-slate-500">Instagram: ${brand.instagram}</span>
+                        <a href="https://wa.me/${brand.whatsapp.replace('+','')}" target="_blank" class="px-4 py-2 rounded-xl bg-emerald-500 text-white font-bold hover:bg-emerald-600">
+                            <i class="fa-brands fa-whatsapp mr-1"></i> Contactar por WhatsApp
+                        </a>
+                    </div>
+                </div>
+            `;
+            document.getElementById('modal-brand-profile').classList.remove('hidden');
+        }
+
+        /* --- COMMUNITY TABS LOGIC --- */
+        function switchCommunityTab(tab) {
+            document.querySelectorAll('.community-subtab').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`subtab-${tab}`).classList.remove('hidden');
+
+            ['adoption', 'meetups', 'forum', 'shelters'].forEach(t => {
+                const btn = document.getElementById(`tab-btn-${t}`);
+                if(btn) {
+                    if(t === tab) {
+                        btn.className = "pb-3 border-b-2 border-teal-600 font-bold text-teal-600 text-sm whitespace-nowrap flex items-center gap-2";
+                    } else {
+                        btn.className = "pb-3 border-b-2 border-transparent font-semibold text-slate-500 hover:text-slate-800 text-sm whitespace-nowrap flex items-center gap-2";
+                    }
+                }
+            });
+
+            renderCommunityTab();
+        }
+
+        function renderCommunityTab() {
+            // Render Adoptions
+            const adoptionGrid = document.getElementById('adoption-cards-grid');
+            adoptionGrid.innerHTML = adoptionPets.map(a => `
+                <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between">
+                    <img src="${a.image}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <span class="text-[10px] font-bold bg-teal-100 text-teal-800 px-2 py-0.5 rounded-full">${a.type}</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">${a.name} (${a.age})</h3>
+                        <p class="text-xs text-slate-500 mb-2"><i class="fa-solid fa-house-heart mr-1"></i>${a.shelter}</p>
+                        <p class="text-xs text-slate-600 mb-4">${a.desc}</p>
+                        <button onclick="alertModal('Solicitud de Adopción Norte', 'Iniciada tu solicitud para adoptar a ${a.name}. Un encargado de la casa de paso en el norte de Bogotá se comunicará contigo.')" class="w-full py-2 rounded-xl bg-teal-600 text-white font-bold text-xs hover:bg-teal-700">
+                            Solicitar Adopción
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Parks / Meetups
+            const meetupsGrid = document.getElementById('meetups-grid');
+            meetupsGrid.innerHTML = petParks.map(p => `
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <span class="text-[10px] font-extrabold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full"><i class="fa-solid fa-tree mr-1"></i>Punto Pet</span>
+                        <h3 class="text-base font-extrabold text-slate-900 mt-2">${p.name}</h3>
+                        <p class="text-xs font-bold text-orange-600 mt-1"><i class="fa-solid fa-map-pin mr-1"></i>${p.location}</p>
+                        <p class="text-xs text-slate-500 mt-1"><i class="fa-regular fa-clock mr-1"></i>${p.time}</p>
+                        <p class="text-xs text-slate-600 mt-3 leading-relaxed">${p.desc}</p>
+                    </div>
+                    <button onclick="alertModal('Asistencia a Encuentro', '¡Te esperemos con tu mascota en ${p.name}!')" class="mt-4 w-full py-2 bg-slate-900 hover:bg-orange-600 text-white font-bold text-xs rounded-xl transition">
+                        Confirmar Asistencia
+                    </button>
+                </div>
+            `).join('');
+
+            // Render Forum
+            const forumContainer = document.getElementById('forum-posts-container');
+            forumContainer.innerHTML = forumPosts.map(p => `
+                <div class="bg-white p-4 rounded-2xl border border-slate-200">
+                    <div class="flex justify-between items-center mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs">
+                                ${p.author.charAt(0)}
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-slate-800">${p.author}</h4>
+                                <p class="text-[10px] text-slate-400">${p.pet}</p>
+                            </div>
+                        </div>
+                        <span class="text-[10px] text-slate-400">${p.time}</span>
+                    </div>
+                    <p class="text-xs text-slate-700 mb-3">${p.content}</p>
+                    <div class="flex items-center gap-4 text-xs text-slate-400 font-semibold">
+                        <button onclick="p.likes++; renderCommunityTab()" class="hover:text-orange-600"><i class="fa-regular fa-thumbs-up mr-1"></i> ${p.likes} Útil</button>
+                        <button class="hover:text-orange-600"><i class="fa-regular fa-comment mr-1"></i> Responder</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Render Shelters Initiatives
+            const sheltersGrid = document.getElementById('shelter-initiatives-grid');
+            sheltersGrid.innerHTML = `
+                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm">
+                    <span class="bg-orange-100 text-orange-700 text-[10px] font-bold px-2 py-0.5 rounded-full">San José de Bavaria (Cll 170)</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-2">Jornada Vacunación & Esterilización Norte</h3>
+                    <p class="text-xs text-slate-600 mt-1 mb-4">Meta: Proteger 150 peluditos de sectores vulnerables entre Cll 138 y 170.</p>
+                    <div class="w-full bg-slate-100 rounded-full h-2 mb-2">
+                        <div class="bg-teal-600 h-2 rounded-full" style="width: 72%"></div>
+                    </div>
+                    <div class="flex justify-between text-xs text-slate-500 mb-4">
+                        <span>$720 USD Recaudados</span>
+                        <span>Meta: $1,000 USD</span>
+                    </div>
+                    <button onclick="alertModal('Aporte a Campaña Norte', '¡Gracias por apoyar la esterilización en Bogotá Norte!')" class="w-full py-2 bg-teal-600 text-white font-bold text-xs rounded-xl hover:bg-teal-700">
+                        Donar $5 USD a la Causa
+                    </button>
+                </div>
+            `;
+        }
+
+        function postToForum() {
+            const input = document.getElementById('forum-input');
+            if(!input.value.trim()) return;
+
+            forumPosts.unshift({
+                author: 'Camila Rodríguez (Cedritos)',
+                pet: 'Dueño de Bruno & Misha',
+                time: 'Justo ahora',
+                content: input.value,
+                likes: 0
+            });
+
+            input.value = '';
+            renderCommunityTab();
+        }
+
+        function openAdoptionModal() {
+            alertModal('Publicar Adopción Norte', 'Formulario habilitado para hogares de paso y vecinos entre la Calle 138 y 170.');
+        }
+
+        /* --- USER & SHOP DASHBOARD LOGIC --- */
+        function switchUserRole(role) {
+            currentRole = role;
+            const ownerBtn = document.getElementById('role-btn-owner');
+            const vendorBtn = document.getElementById('role-btn-vendor');
+            const ownerDash = document.getElementById('dashboard-owner');
+            const vendorDash = document.getElementById('dashboard-vendor');
+
+            if(role === 'owner') {
+                ownerBtn.className = "px-4 py-2 rounded-lg font-bold text-xs transition bg-white text-slate-800 shadow-sm";
+                vendorBtn.className = "px-4 py-2 rounded-lg font-bold text-xs text-slate-500 transition hover:text-slate-800";
+                ownerDash.classList.remove('hidden');
+                vendorDash.classList.add('hidden');
+                document.getElementById('user-type-subtitle').innerText = "Dueño de Mascota en Bogotá Norte";
+            } else {
+                vendorBtn.className = "px-4 py-2 rounded-lg font-bold text-xs transition bg-white text-slate-800 shadow-sm";
+                ownerBtn.className = "px-4 py-2 rounded-lg font-bold text-xs text-slate-500 transition hover:text-slate-800";
+                vendorDash.classList.remove('hidden');
+                ownerDash.classList.add('hidden');
+                document.getElementById('user-type-subtitle').innerText = "Tienda Registrada (Corredor Cll 138-170)";
+                renderVendorTable();
+            }
+        }
+
+        function renderVendorTable() {
+            const tbody = document.getElementById('vendor-product-rows');
+            tbody.innerHTML = '';
+
+            productsData.forEach(p => {
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="py-3 px-2 flex items-center gap-2">
+                            <img src="${p.image}" class="w-8 h-8 rounded-lg object-cover">
+                            <div>
+                                <p class="font-bold text-slate-800">${p.name}</p>
+                                <span class="text-[10px] text-slate-400">${p.zoneTag}</span>
+                            </div>
+                        </td>
+                        <td class="py-3 px-2 text-slate-500">${p.category}</td>
+                        <td class="py-3 px-2 font-bold">$${p.price.toFixed(2)}</td>
+                        <td class="py-3 px-2"><span class="bg-teal-100 text-teal-800 text-xs px-2 py-0.5 rounded-full font-bold">${p.impactPercent}%</span></td>
+                        <td class="py-3 px-2 text-right">
+                            <button onclick="deleteVendorProduct('${p.id}')" class="text-red-500 hover:text-red-700 text-xs p-1">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function openAddProductModal() {
+            document.getElementById('modal-add-product').classList.remove('hidden');
+        }
+
+        function handleSaveProduct(e) {
+            e.preventDefault();
+            const name = document.getElementById('new-prod-name').value;
+            const price = parseFloat(document.getElementById('new-prod-price').value);
+            const category = document.getElementById('new-prod-category').value;
+            const impactPercent = parseInt(document.getElementById('new-prod-impact').value);
+            const img = document.getElementById('new-prod-img').value || 'https://images.unsplash.com/photo-1541599540903-216a46ca1dc0?auto=format&fit=crop&w=400&q=80';
+            const desc = document.getElementById('new-prod-desc').value;
+
+            const newProd = {
+                id: 'p' + (productsData.length + 1),
+                brandId: 'b1',
+                brandName: 'EcoPaw Cedritos',
+                neighborhood: 'Cedritos',
+                zoneTag: '📍 Cedritos (Cll 140)',
+                name,
+                category,
+                price,
+                rating: 5.0,
+                impactPercent,
+                image: img,
+                description: desc
+            };
+
+            productsData.unshift(newProd);
+            closeModal('modal-add-product');
+            renderVendorTable();
+            alertModal('Éxito', 'El producto ha sido añadido al catálogo de Bogotá Norte.');
+        }
+
+        function deleteVendorProduct(id) {
+            productsData = productsData.filter(p => p.id !== id);
+            renderVendorTable();
+        }
+
+        /* --- SHOPPING CART SYSTEM --- */
+        function addToCart(prodId) {
+            const prod = productsData.find(p => p.id === prodId);
+            if(!prod) return;
+
+            const existing = cart.find(item => item.product.id === prodId);
+            if(existing) {
+                existing.quantity++;
+            } else {
+                cart.push({ product: prod, quantity: 1 });
+            }
+
+            updateCartUI();
+            openCartModal();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+            if(totalItems > 0) {
+                badge.innerText = totalItems;
+                badge.classList.remove('hidden');
+            } else {
+                badge.classList.add('hidden');
+            }
+
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+
+            if(cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-slate-400 py-8 text-xs">Tu carrito está vacío.</p>`;
+            } else {
+                cart.forEach(item => {
+                    container.innerHTML += `
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <div class="flex items-center gap-3">
+                                <img src="${item.product.image}" class="w-12 h-12 rounded-xl object-cover">
+                                <div>
+                                    <h4 class="font-bold text-xs text-slate-800 line-clamp-1">${item.product.name}</h4>
+                                    <p class="text-[10px] text-slate-400">${item.product.zoneTag}</p>
+                                    <p class="text-xs text-orange-600 font-extrabold">$${item.product.price.toFixed(2)} x ${item.quantity}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="changeCartQty('${item.product.id}', -1)" class="w-6 h-6 rounded-md bg-slate-100 text-xs font-bold text-slate-600">-</button>
+                                <span class="text-xs font-bold">${item.quantity}</span>
+                                <button onclick="changeCartQty('${item.product.id}', 1)" class="w-6 h-6 rounded-md bg-slate-100 text-xs font-bold text-slate-600">+</button>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+
+            const totalPrice = cart.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
+            const totalImpact = cart.reduce((acc, item) => acc + (item.product.price * item.quantity * (item.product.impactPercent / 100)), 0);
+
+            document.getElementById('cart-total-price').innerText = `$${totalPrice.toFixed(2)} USD`;
+            document.getElementById('cart-impact-donation').innerText = `$${totalImpact.toFixed(2)} USD`;
+        }
+
+        function changeCartQty(prodId, delta) {
+            const item = cart.find(i => i.product.id === prodId);
+            if(!item) return;
+
+            item.quantity += delta;
+            if(item.quantity <= 0) {
+                cart = cart.filter(i => i.product.id !== prodId);
+            }
+            updateCartUI();
+        }
+
+        function openCartModal() {
+            updateCartUI();
+            document.getElementById('modal-cart').classList.remove('hidden');
+        }
+
+        function checkoutCart() {
+            if(cart.length === 0) {
+                alertModal('Carrito Vacío', 'Agrega productos antes de realizar tu pedido.');
+                return;
+            }
+
+            const total = cart.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
+            cart = [];
+            updateCartUI();
+            closeModal('modal-cart');
+            alertModal('¡Pedido Confirmado en Bogotá Norte!', `Tu pedido por $${total.toFixed(2)} USD ha sido asignado al servicio de mensajería local en el corredor Cll 138-170. ¡Gracias por contribuir a la causa animal!`);
+        }
+
+        /* --- UTILS / MODALS --- */
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        function alertModal(title, msg) {
+            document.getElementById('alert-title').innerText = title;
+            document.getElementById('alert-message').innerText = msg;
+            document.getElementById('modal-alert').classList.remove('hidden');
+        }
+
+        // INIT APPLICATION
+        window.onload = function() {
+            renderFeaturedProducts();
+            renderBrandsList(brandsData);
+            renderCatalog();
+        };
+    </script>
+</body>
+</html>
